@@ -90,11 +90,21 @@ def file_filter(f):
         return False
 
 if __name__ == '__main__':
-    music_dir = "/Users/linlinlin/Music/网易云音乐"
+    # file_list = ['黑豹乐队 - 无地自容.ncm', '欧阳菲菲 - 感恩的心.ncm']
+    music_dir = "/Users/waterlin/Music/网易云音乐"
     files = os.listdir(music_dir)
+    # print(files)
+
+
+
     file_list = list(filter(file_filter, files))
     # print(file_list)
     for file in file_list:
         filepath =  os.path.join(music_dir, file)
         # print(filepath)
-        print(filepath,"解密成功，新文件名为：",dump(filepath))
+        newfile = dump(filepath)
+        print(filepath,"解密成功，新文件名为：", newfile)
+        if newfile:
+            os.remove(filepath)
+            print("删除加密文件：", filepath)
+        
