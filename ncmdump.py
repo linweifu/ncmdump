@@ -2,6 +2,10 @@
 __author__ = 'qyh'
 __date__ = '2018/10/16 9:22'
 
+
+# macos
+# pip install pycryptodome
+# pip install Crypto
 import binascii
 import struct
 import base64
@@ -77,9 +81,20 @@ def dump(file_path):
     f.close()
     return file_name
 
+import os
+
+def file_filter(f):
+    if f[-4:] in ['.ncm']:
+        return True
+    else:
+        return False
 
 if __name__ == '__main__':
-    file_list = ['陈芳语 - 爱你.ncm', '李翊君 - 雨蝶.ncm']
+    music_dir = "/Users/linlinlin/Music/网易云音乐"
+    files = os.listdir(music_dir)
+    file_list = list(filter(file_filter, files))
+    # print(file_list)
     for file in file_list:
-        filepath = "F:\CloudMusic\\"+file
-        dump(filepath)
+        filepath =  os.path.join(music_dir, file)
+        # print(filepath)
+        print(filepath,"解密成功，新文件名为：",dump(filepath))
